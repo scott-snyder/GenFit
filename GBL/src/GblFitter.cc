@@ -1,5 +1,5 @@
 //-*-mode: C++; c-basic-offset: 2; -*-
-/* Copyright 2013-2014
+/* Copyright 2013-2014, 2025
  *  Authors: Sergey Yashchenko and Tadeas Bilka
  *
  *  This is an interface to General Broken Lines
@@ -158,16 +158,21 @@ void GblFitter::processTrackWithRep(Track* trk, const AbsTrackRep* rep, bool res
   // ------------------------------------------------------------------- 
   for (unsigned int iIter = 0; iIter < m_externalIterations; iIter++) {
     // GBL refit (1st of reference, then refit of GBL trajectory itself)
-    int nscat = 0, nmeas = 0, ndummy = 0;
+#ifdef DEBUG
+    int nscat = 0, ndummy = 0;
+#endif
+    int nmeas = 0;
     std::vector<gbl::GblPoint> points = collectGblPoints(trk, rep);
     for(unsigned int ip = 0;ip<points.size(); ip++) {
       GblPoint & p = points.at(ip);
+#ifdef DEBUG
       if (p.hasScatterer())
         nscat++;
-      if (p.hasMeasurement())
-        nmeas++;
       if(!p.hasMeasurement()&&!p.hasScatterer())
         ndummy++;
+#endif
+      if (p.hasMeasurement())
+        nmeas++;
     }
     gbl::GblTrajectory traj(points, gblfs->hasCurvature());
     
@@ -292,12 +297,12 @@ void GblFitter::updateGblInfo(gbl::GblTrajectory& traj, genfit::Track* trk, cons
     return;
   
   // Update points in track and fitterInfo(rep)
-  int igblfi = -1;
+  //int igblfi = -1;
   for (unsigned int ip = 0; ip < trk->getNumPoints(); ip++) {      
     GblFitterInfo * gblfi = dynamic_cast<GblFitterInfo*>(trk->getPoint(ip)->getFitterInfo(rep));
     if (!gblfi)
       continue;
-    igblfi++;
+    //igblfi++;
     
     // The point will calculate its position on the track
     // (counting fitter infos) which hopefully

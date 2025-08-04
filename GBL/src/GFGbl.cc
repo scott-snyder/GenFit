@@ -1,5 +1,5 @@
 //-*-mode: C++; c-basic-offset: 2; -*-
-/* Copyright 2013
+/* Copyright 2013, 2025
  *  Authors: Sergey Yashchenko and Tadeas Bilka
  *
  *  This is an interface to General Broken Lines
@@ -329,7 +329,9 @@ void GFGbl::processTrackWithRep(Track* trk, const AbsTrackRep* rep, bool /*resor
   // measurement won't be considered, but scattering yes
   bool skipMeasurement = false;
   // Chi2 of Reference Track
+#ifdef DEBUG
   double trkChi2 = 0.;
+#endif
   // This flag enables/disables fitting of q/p parameter in GBL
   // It is switched off automatically if no B-field at (0,0,0) is detected.
   bool fitQoverP = true;
@@ -527,7 +529,9 @@ void GFGbl::processTrackWithRep(Track* trk, const AbsTrackRep* rep, bool /*resor
       // Residual between measured position and reference track position
       TVectorD residual = -1. * (raw_coor - HitHMatrix->Hv(state));
 
+#ifdef DEBUG
       trkChi2 += residual(0) * residual(0) / raw_cov(0, 0) + residual(1) * residual(1) / raw_cov(1, 1);
+#endif
         
       // Measurement point
       GblPoint measPoint(jacPointToPoint);
