@@ -1,6 +1,8 @@
 Bottom: 244adeed2ab1bc790cc38e206455af0fdc5893d0
 Top:    41c3260096da16be6bc17f8bf35826b1e2110add
 Author: sss <sss@karma>
-Date:   2025-08-03 21:19:30 -0400
+Date:   2025-10-30 13:41:16 -0400
 
-cmake warnings
+Update minimum cmake version to 3.10.
+
+Get rid of cmake deprecation warning.
