@@ -2,6 +2,10 @@
 // Write fit results to tree, read again, compare.
 //
 
+#if __GNUC__ >= 16
+# pragma GCC diagnostic ignored "-Warray-bounds"
+#endif
+
 #include <ConstField.h>
 #include <Exception.h>
 #include <FieldManager.h>
