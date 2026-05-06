@@ -271,8 +271,18 @@ if(DEFINED RAVE)
 endif()
 
 
+# Needed when building in ABS_SYMLINK mode.
+# Cling tries to load the PCM file for a library in the same directory
+# as the library, after resolving symlinks.
+# But the libraries are built in the build/PACK/lib directory and the PCM
+# files in build/PACK/rootdict.  They both get symlinked in inst/lib,
+# but that doesn't help.  So put a link to the PCM in build/PACK/lib.
+add_custom_target( pcmlink
+                   COMMAND  ln -sf ${ROOT_PCM_FILES} ${LIBRARY_OUTPUT_PATH} )
+
 # install
 ADD_SHARED_LIBRARY( ${PROJECT_NAME} ${library_sources})
+add_dependencies( ${PROJECT_NAME} pcmlink )
 INSTALL(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
 INSTALL(FILES ${ROOT_PCM_FILES} DESTINATION ${CMAKE_INSTALL_LIBDIR})
 
