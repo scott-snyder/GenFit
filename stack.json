@@ -1,13 +1,14 @@
 {
   "version": 5,
-  "prev": "e20327f22c55ee2dc1d8ee87d1a6eed468f7d5b8",
-  "head": "107b4751beb96b67f7965eb444b2ca8d5acf54af",
+  "prev": "a7a8da8b4bcb0abcd12ebf5dcf9d66e7f437dfac",
+  "head": "d33edb923a8ddfa1897da507d711ffb47d204689",
   "applied": [
     "gitignore",
     "cmakewarn",
     "warn",
     "nosystem",
-    "gccbug-newxx"
+    "gccbug-newxx",
+    "symlink"
   ],
   "unapplied": [],
   "hidden": [],
@@ -23,6 +24,9 @@
     },
     "nosystem": {
       "oid": "868867be84ffc98283cc06a2625862309de47b41"
+    },
+    "symlink": {
+      "oid": "d33edb923a8ddfa1897da507d711ffb47d204689"
     },
     "warn": {
       "oid": "5dba3420de9c87b774ab37c249700784a81144e6"
